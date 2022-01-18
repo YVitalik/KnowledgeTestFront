@@ -1,0 +1,37 @@
+<table *ngIf="!testStarted" class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Test name</th>
+        <th scope="col">Time for passing</th>
+        <th scope="col">Start Test</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let test of allTests">
+        <td>{{test.testName}}</td>
+        <td>{{test.timeInMin}} min</td>
+        <td><button class="btn btn-primary" type="submit" (click)="getTestQuestions(test.id!)">Start test</button></td>
+      </tr>
+    </tbody>
+</table>
+
+<table *ngIf="testStarted" class="table table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Question</th>
+      <th scope="col">Minutes left: {{counter}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let test of testQuestions; let i = index">
+      <td>{{test}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<form #registerForm="ngForm" (ngSubmit)="checkAnswears(registerForm)" *ngIf="testStarted">
+  <input *ngFor="let test of testQuestions; let i = index" name="answear{{i}}" ngModel>
+  <button class="btn btn-success" id="finishTest" type="submit">Send</button>
+</form>
+
+

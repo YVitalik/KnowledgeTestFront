@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  knowledgeApi: 'https://localhost:5001/',
+  whiteListedDomains: ['localhost:5001']
 };
 
 /*

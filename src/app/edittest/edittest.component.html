@@ -1,0 +1,63 @@
+<table *ngIf="showStartPage" class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Test name</th>
+        <th scope="col">Time for passing</th>
+        <th scope="col">Update test</th>
+        <th scope="col">Edit test questions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let test of allTests">
+        <td>{{test.testName}}</td>
+        <td>{{test.timeInMin}} min</td>
+        <td><button class="btn btn-primary" type="submit" (click)="startUpdateTest(test.id!)">Update test</button></td>
+        <td><button class="btn btn-primary" type="submit" (click)="showTestQuestions(test.id!)">Edit test questions</button></td>
+      </tr>
+    </tbody>
+</table>
+
+<a *ngIf="showStartPage" class="btn btn-danger" routerLink="/teacherfunc" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Go back</a>
+
+<div *ngIf="showUpdateTestForm" class="container">
+    <form #registerForm="ngForm" (ngSubmit)="updateTest(registerForm)">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="New test name"  name="testName" ngModel>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="New time for passing"  name="timeInMin" id="email" ngModel>
+        </div>
+        <button class="btn btn-success" type="submit">Update test</button>
+        <a class="btn btn-danger ml-2" (click)="toStart()">Cancel</a>
+    </form>
+</div>
+
+<table *ngIf="showTestQuestionsTable" class="table table-hover">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Question</th>
+      <th scope="col">Answear</th>
+      <th scope="col">Edit question</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of testQuestions">
+      <td>{{question.question}}</td>
+      <td>{{question.answear}}</td>
+      <td><button class="btn btn-primary" type="submit" (click)="startEditQuestion(question.id!)">Edit question</button></td>
+    </tr>
+  </tbody>
+  <a class="btn btn-danger" (click)="toStart()">Go back</a>
+</table>
+
+<div *ngIf="showUpdateQuestionsForm" class="container">
+  <form #registerForm="ngForm" (ngSubmit)="updateQuestion(registerForm)">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="New question"  name="question" ngModel>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="New answear"  name="answear" id="email" ngModel>
+      </div>
+      <button class="btn btn-success" type="submit">Update question</button>
+  </form>
+</div>

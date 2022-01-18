@@ -1,0 +1,39 @@
+<table *ngIf="showStartPage" class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Role name</th>
+        <th scope="col">Normalized role name </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of allRoles">
+        <td>{{role.name}}</td>
+        <td>{{role.normalizedName}}</td>
+      </tr>
+    </tbody>
+    <button class="btn btn-primary" type="submit" (click)="startRoleCreation()">Add new role</button>
+    <button class="btn btn-primary" type="submit" (click)="startAssignUserToRoles()">Assign user to roles</button>
+    <a class="btn btn-danger ml-2" routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >Go back</a>
+</table>
+
+<div *ngIf="showAddRoleForm" class="container">
+    <form #registerForm="ngForm" (ngSubmit)="createRole(registerForm)">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Role name"  name="rolename" id="username" ngModel>
+        </div>
+        <button class="btn btn-success" type="submit">Add role</button>
+        <button class="btn btn-danger" (click)="cancel()">Go back</button>
+    </form>
+</div>
+
+<form *ngIf="showAssignUserToRolesForm" #registerForm="ngForm" (ngSubmit)="assignUserToRoles(registerForm)">
+    <label>Enter username: </label>
+    <input type="text" class="form-control" name="username" ngModel>
+    <div *ngFor="let role of allRoles" class="form-check">
+      <input class="form-check-input" type="checkbox" name="{{role.name}}" ngModel>
+      <label class="form-check-label">{{role.name}}</label>
+    </div>
+    <button class="btn btn-primary" id="finishTest" type="submit">Send</button>
+    <button class="btn btn-danger" (click)="cancel()">Go back</button>
+</form>
+

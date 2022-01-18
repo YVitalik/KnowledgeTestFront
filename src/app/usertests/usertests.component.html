@@ -1,0 +1,34 @@
+<table *ngIf="!showDetails" class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Test name</th>
+        <th scope="col">Right answears percents</th>
+        <th scope="col">Is passed</th>
+        <th scope="col">Show details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let testResults of userTests; let i = index">
+        <td>{{testResults.testName}}</td>
+        <td>{{testResults.rightAnswerPercents}}%</td>
+        <td>{{testResults.passed}}</td>
+        <td><button class="btn btn-primary" type="submit" (click)="getTestDetails(testResults.id!)">Show details</button></td>
+      </tr>
+    </tbody>
+</table>
+
+<table *ngIf="showDetails" class="table table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Right answears </th>
+        <th scope="col">Passed in</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let testDetails of testDetails">
+        <td>{{testDetails.rightAnswears}}</td>
+        <td>{{testDetails.passTime}}</td>
+      </tr>
+      <button class="btn btn-danger" (click)="returnAllUserTests()">Return</button>
+    </tbody>
+</table>
